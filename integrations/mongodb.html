@@ -141,8 +141,8 @@ var database = await context.GetDatabaseAsync(CancellationToken.None);
 
 var applications = database.GetCollection&lt;OpenIddictMongoDbApplication&gt;(options.ApplicationsCollectionName);
 
-await applications.Indexes.CreateManyAsync(new[]
-{
+await applications.Indexes.CreateManyAsync(
+[
     new CreateIndexModel&lt;OpenIddictMongoDbApplication&gt;(
         Builders&lt;OpenIddictMongoDbApplication&gt;.IndexKeys.Ascending(application =&gt; application.ClientId),
         new CreateIndexOptions
@@ -163,7 +163,7 @@ await applications.Indexes.CreateManyAsync(new[]
         {
             Background = true
         })
-});
+]);
 
 var authorizations = database.GetCollection&lt;OpenIddictMongoDbAuthorization&gt;(options.AuthorizationsCollectionName);
 
@@ -191,8 +191,8 @@ await scopes.Indexes.CreateOneAsync(new CreateIndexModel&lt;OpenIddictMongoDbSco
 
 var tokens = database.GetCollection&lt;OpenIddictMongoDbToken&gt;(options.TokensCollectionName);
 
-await tokens.Indexes.CreateManyAsync(new[]
-{
+await tokens.Indexes.CreateManyAsync(
+[
     new CreateIndexModel&lt;OpenIddictMongoDbToken&gt;(
         Builders&lt;OpenIddictMongoDbToken&gt;.IndexKeys.Ascending(token =&gt; token.ReferenceId),
         new CreateIndexOptions&lt;OpenIddictMongoDbToken&gt;
@@ -221,7 +221,7 @@ await tokens.Indexes.CreateManyAsync(new[]
         {
             Background = true
         })
-});
+]);
 </code></pre></li>
 </ul>
 <h2 id="advanced-configuration">Advanced configuration</h2>

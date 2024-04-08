@@ -217,10 +217,10 @@ identity.SetDestinations(static claim =&gt; claim.Type switch
     // Allow the &quot;name&quot; claim to be stored in both the access and identity tokens
     // when the &quot;profile&quot; scope was granted (by calling principal.SetScopes(...)).
     Claims.Name when claim.Subject.HasScope(Scopes.Profile)
-        =&gt; new[] { Destinations.AccessToken, Destinations.IdentityToken },
+        =&gt; [Destinations.AccessToken, Destinations.IdentityToken],
 
     // Otherwise, only store the claim in the access tokens.
-    _ =&gt; new[] { Destinations.AccessToken }
+    _ =&gt; [Destinations.AccessToken]
 });
 </code></pre><h2 id="if-applicable-update-your-openiddict-mongodb-authorizations">If applicable, update your OpenIddict MongoDB authorizations</h2>
 <p>To match the casing used by the other properties, the name used in the BSON representation of the <code>OpenIddictMongoDbAuthorization.CreationDate</code>

@@ -122,22 +122,19 @@ principal.SetDestinations(static claim =&gt; claim.Type switch
 {
     // If the &quot;profile&quot; scope was granted, allow the &quot;name&quot; claim to be
     // added to the access and identity tokens derived from the principal.
-    Claims.Name when claim.Subject.HasScope(Scopes.Profile) =&gt; new[]
-    {
+    Claims.Name when claim.Subject.HasScope(Scopes.Profile) =&gt;
+    [
         OpenIddictConstants.Destinations.AccessToken,
         OpenIddictConstants.Destinations.IdentityToken
-    },
+    ],
 
     // Never add the &quot;secret_value&quot; claim to access or identity tokens.
     // In this case, it will only be added to authorization codes,
     // refresh tokens and user/device codes, that are always encrypted.
-    &quot;secret_value&quot; =&gt; Array.Empty&lt;string&gt;(),
+    &quot;secret_value&quot; =&gt; [],
 
     // Otherwise, add the claim to the access tokens only.
-    _ =&gt; new[]
-    {
-        OpenIddictConstants.Destinations.AccessToken
-    }
+    _ =&gt; [OpenIddictConstants.Destinations.AccessToken]
 });
 
 return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
